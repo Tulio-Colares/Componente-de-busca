@@ -8,7 +8,10 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import { Button } from '@mui/material';
+import { Button, Stack, TextField } from '@mui/material';
+import {suggestions} from "../data/suggestions";
+import Autocomplete from '@mui/material/Autocomplete';
+import SearchBar from './SearchBar'
 
 //Estilização
 
@@ -66,6 +69,7 @@ export default function SearchAppBar() {
 
     const Alerta = () => {
         alert(`${busca}`)
+        console.log(suggestions)
     }
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -89,15 +93,36 @@ export default function SearchAppBar() {
             MUI
           </Typography>
           <Search>
-            <Button variant="contained" onClick={Alerta} sx={{backgroundColor: "transparent", boxShadow: "none"}}>
+            <Button 
+                variant="contained" 
+                onClick={Alerta} 
+                sx={{backgroundColor: "transparent", boxShadow: "none"}}
+            >
                 <SearchIcon/>
             </Button>
-            <StyledInputBase
-              placeholder="Buscar…"
-              inputProps={{ 'aria-label': 'search' }}
-              onChange={Buscando}
-              value={busca}
+            <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={suggestions}
+                sx={{ width: 300 }}
+                renderInput={(params) => <TextField {...params} label="Movie" />}
             />
+                <TextField
+                    size="small"
+                    name="busca"
+                    placeholder="Buscar..."
+                    inputProps={{ 'aria-label': 'search' }}
+                    sx={{ width: "30ch" }}
+                    onSubmit={Alerta}
+                    onChange={Buscando}
+                    value={busca}
+                />
+                <SearchBar
+                    // sx={{ width: "30ch" }}
+                    // onSubmit={Alerta}
+                    // onChange={Buscando}
+                    // value={busca}
+                />
           </Search>
         </Toolbar>
       </AppBar>
