@@ -1,10 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
+import ImputDeBusca from './components/ImputDeBusca';
 
 function App() {
   return (
     <div className="App">
-      Página Inicial 2
+      Página Inicial
+      <ImputDeBusca/>
     </div>
   );
 }
